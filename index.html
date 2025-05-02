@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Game 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 50px;
+        }
+        .game-img {
+            width: 300px;
+            height: 300px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+        .game-img:hover {
+            transform: scale(1.1);
+        }
+        .btn-container {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1 style="color: #333;">Brain Game 2</h1>
+        <p style="color: #555;">Guess the image category! Is it a fruit or a face?</p>
+        
+        <div id="game-image" class="game-img">
+            <img id="image" src="" alt="Game Image" width="100%" height="100%" />
+        </div>
+
+        <div class="btn-container">
+            <button onclick="checkAnswer('fruit')">Fruit</button>
+            <button onclick="checkAnswer('face')">Face</button>
+        </div>
+        
+        <p id="feedback"></p>
+    </div>
+
+    <script>
+        const images = [
+            {src: 'fruit1.jpg', type: 'fruit'},
+            {src: 'fruit2.jpg', type: 'fruit'},
+            {src: 'face1.jpg', type: 'face'},
+            {src: 'face2.jpg', type: 'face'}
+        ];
+
+        let currentImage = {};
+
+        function loadImage() {
+            const randomIndex = Math.floor(Math.random() * images.length);
+            currentImage = images[randomIndex];
+            document.getElementById('image').src = currentImage.src;
+        }
+
+        function checkAnswer(answer) {
+            const feedback = document.getElementById('feedback');
+            if (answer === currentImage.type) {
+                feedback.textContent = "Correct!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "Wrong! Try again.";
+                feedback.style.color = "red";
+            }
+            setTimeout(() => {
+                loadImage();
+                feedback.textContent = '';
+            }, 1500);
+        }
+
+        loadImage();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
